@@ -23,7 +23,7 @@ def parse_single_quote(quote_soup: BeautifulSoup) -> Quote:
     )
 
 
-def get_all_quotes():
+def get_all_quotes() -> [Quote]:
     result = []
     num_page = 1
     while True:
@@ -35,7 +35,6 @@ def get_all_quotes():
         num_page += 1
         if not soup.select(".pager > .next"):
             break
-    print(result[0])
     return result
 
 
@@ -47,7 +46,7 @@ def writing_csv(path: str, quotes: [Quote]) -> None:
             writer.writerow([quote.text, quote.author, quote.tags])
 
 
-def main(output_csv_path: str):
+def main(output_csv_path: str) -> None:
     quotes = get_all_quotes()
     writing_csv(output_csv_path, quotes)
 
